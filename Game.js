@@ -6,6 +6,11 @@ const axios = require('axios');
 export default function Game ({navigation}) {
 
   const [deckID, setDeckID] = useState('');
+  const [questionMaster, setQuestionMaster] = useState('');
+  const [mates, setMates] = useState([]);
+  //linked list?
+  const [kingsCount, setKingsCount] = useState(0);
+
 
   useEffect(() => {
     axios.get('http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
