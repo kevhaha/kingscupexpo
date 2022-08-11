@@ -12,13 +12,13 @@ export default function Home ({navigation}) {
       </View>
       <View style={styles.image}>
         <Image
-        source={require('./photos/kingsqup.jpg')}
+        source={require('./assets/kingsqup.jpg')}
         />
         <StatusBar style="auto" />
       </View>
       <View style={styles.begin}>
         <StatusBar style="auto" />
-        <Button onPress={()=> navigation.navigate('Game')} title="Begin Game!"/>
+        <Button onPress={()=> navigation.navigate('Players')} title="Begin Game!"/>
       </View>
       <View style={styles.rules}>
         <StatusBar style="auto" />
