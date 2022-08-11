@@ -16,9 +16,9 @@ export default function Home ({navigation}) {
         />
         <StatusBar style="auto" />
       </View>
-      <View style={styles.begin}>
+      <View style={styles.players}>
         <StatusBar style="auto" />
-        <Button onPress={()=> navigation.navigate('Players')} title="Begin Game!"/>
+        <Button onPress={()=> navigation.navigate('Players')} title="Add Players!"/>
       </View>
       <View style={styles.rules}>
         <StatusBar style="auto" />
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     resizeMode: 'contain'
   },
-  begin: {
+  players: {
     flex: .5,
     backgroundColor: '#fff',
     alignItems: 'center',

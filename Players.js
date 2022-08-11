@@ -30,6 +30,7 @@ export default function Players ({navigation}) {
               alignItems: 'center',
               justifyContent: 'center',
               borderWidth: .2,
+              borderRadius: 10,
               marginLeft: 65,
               marginRight: 65,
               padding: 5
@@ -124,6 +125,7 @@ const styles = StyleSheet.create({
     width: 330,
     fontSize: 16,
     borderWidth: .2,
+    borderRadius: 5,
     padding: 5,
     margin: 10
   },
