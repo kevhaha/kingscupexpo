@@ -11,7 +11,6 @@ export default function Game ({route, navigation}) {
   const players = route.params.players;
 
   const [deckID, setDeckID] = useState('');
-  const [turn, setTurn] = useState('');
   const [questionMaster, setQuestionMaster] = useState('');
   const [mates, setMates] = useState([]);
   const [deckLoaded, setDeckLoaded] = useState(false);
@@ -27,26 +26,22 @@ export default function Game ({route, navigation}) {
 
   const handleDraw = () => {
     setCardLoaded(false);
-    setCardCount(cardCount + 1);
+    if (playerIndex >= players.length-1) {
+      setPlayerIndex(0);
+    } else {
+      setPlayerIndex(playerIndex + 1);
+    }
     axios.get(`http://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
     .then((res) => {
+      setCardCount(cardCount + 1);
       setCurrentCard(res.data.cards[0].image);
       setCurrentCardValue(res.data.cards[0].value);
-      if (playerIndex >= players.length-1) {
-        setPlayerIndex(0);
-      } else {
-        setPlayerIndex(playerIndex + 1);
-      }
       if (res.data.cards[0].value === "KING") {
         setKingsCount(kingsCount + 1);
       }
-      return res.data.cards[0].value
     })
-    .then((value) => {
+    .then(() => {
       setCardLoaded(true);
-      return value;
-    })
-    .then((value) => {
     })
     .catch((err) => {
       console.log(err);
