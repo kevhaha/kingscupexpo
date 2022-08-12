@@ -1,9 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { TouchableHighlight, Button, Image, StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { FlatList, TouchableHighlight, Button, Image, StyleSheet, Text, View } from 'react-native';
+// import { usePlayers } from './PlayersContext.js';
 const axios = require('axios');
 
-export default function Game ({navigation}) {
+export default function Game ({route, navigation}) {
+
+  // const { playerArray, setPlayerArray } = useContext(PlayersContext)
+  // const { playerArray, setPlayerArray } = usePlayers();
+  const players = route.params.players;
 
   const [deckID, setDeckID] = useState('');
   const [turn, setTurn] = useState('');
@@ -12,6 +17,9 @@ export default function Game ({navigation}) {
   const [deckLoaded, setDeckLoaded] = useState(false);
   const [cardLoaded, setCardLoaded] = useState(false);
   const [currentCard, setCurrentCard] = useState('');
+  const [currentCardValue, setCurrentCardValue] = useState('');
+  const [currentPlayer, setCurrentPlayer] = useState(players[0]);
+  const [playerIndex, setPlayerIndex] = useState(0);
   //linked list?
   const [kingsCount, setKingsCount] = useState(0);
   const [cardCount, setCardCount] = useState(0);
@@ -22,20 +30,35 @@ export default function Game ({navigation}) {
     setCardCount(cardCount + 1);
     axios.get(`http://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
     .then((res) => {
-      console.log('draw', res.data.cards[0]);
+      setCurrentCard(res.data.cards[0].image);
+      setCurrentCardValue(res.data.cards[0].value);
+      if (playerIndex >= players.length-1) {
+        setPlayerIndex(0);
+      } else {
+        setPlayerIndex(playerIndex + 1);
+      }
       if (res.data.cards[0].value === "KING") {
         setKingsCount(kingsCount + 1);
       }
-      setCurrentCard(res.data.cards[0].image);
-      return currentCard;
+      return res.data.cards[0].value
     })
-    .then(() => {
+    .then((value) => {
       setCardLoaded(true);
+      return value;
+    })
+    .then((value) => {
     })
     .catch((err) => {
       console.log(err);
     })
   }
+
+  useEffect(() => {
+    setCurrentPlayer(players[playerIndex]);
+    if (currentCardValue === "QUEEN") {
+      setQuestionMaster(currentPlayer);
+    }
+  }, [cardCount])
 
   useEffect(() => {
     if (kingsCount === 4) {
@@ -86,9 +109,12 @@ export default function Game ({navigation}) {
               }}
             />
           </TouchableHighlight>}
-          <Text>Mates: {mates}</Text>
-          <Text>Question Master: {questionMaster}</Text>
-          <Text>Kings' Count: {kingsCount}</Text>
+          <View style={styles.gameInfo}>
+            <Text>Turn: {currentPlayer}</Text>
+            <Text>Mates: {mates}</Text>
+            <Text>Question Master: {questionMaster}</Text>
+            <Text>Kings' Count: {kingsCount}</Text>
+          </View>
         </View>}
         {gameOver &&
         <View style={styles.over}>
@@ -128,6 +154,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  gameInfo: {
+    flex: .4,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
   card: {
     position: 'absolute',
