@@ -12,14 +12,14 @@ export default function Game ({route, navigation}) {
 
   const [deckID, setDeckID] = useState('');
   const [questionMaster, setQuestionMaster] = useState('');
-  const [mates, setMates] = useState([]);
+  // const [mates, setMates] = useState([]);
+  // linked list?
   const [deckLoaded, setDeckLoaded] = useState(false);
   const [cardLoaded, setCardLoaded] = useState(false);
   const [currentCard, setCurrentCard] = useState('');
   const [currentCardValue, setCurrentCardValue] = useState('');
   const [currentPlayer, setCurrentPlayer] = useState(players[0]);
   const [playerIndex, setPlayerIndex] = useState(0);
-  //linked list?
   const [kingsCount, setKingsCount] = useState(0);
   const [cardCount, setCardCount] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -78,7 +78,7 @@ export default function Game ({route, navigation}) {
     <View style={styles.container}>
       {gameOver &&
       <View style={styles.top}>
-        <Text>Player: </Text>
+        <Text>Player: {currentPlayer} </Text>
       </View>}
       <View style={styles.centerContainer}>
         {!gameOver &&
@@ -106,7 +106,7 @@ export default function Game ({route, navigation}) {
           </TouchableHighlight>}
           <View style={styles.gameInfo}>
             <Text>Turn: {currentPlayer}</Text>
-            <Text>Mates: {mates}</Text>
+            {/* <Text>Mates: {mates}</Text> */}
             <Text>Question Master: {questionMaster}</Text>
             <Text>Kings' Count: {kingsCount}</Text>
           </View>
