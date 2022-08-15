@@ -10,15 +10,29 @@ const axios = require('axios');
 app.use(express.json());
 app.use(cors());
 
+let currentDeck = [];
+
 app.get('/cards', (req, res) => {
   db.read()
   .then((response) => {
-    console.log(response);
+    var temp = response.slice();
+    currentDeck = temp;
+    console.log(currentDeck);
+    // console.log(response);
     res.send(response);
   })
   .catch((err) => {
     console.log(err);
   })
+});
+
+app.get('/draw', (req, res) => {
+  var randomIndex = Math.floor(Math.random() * (currentDeck.length-1))
+  console.log('length', currentDeck.length-1);
+  console.log('index', randomIndex);
+  console.log('current card', currentDeck[randomIndex]);
+  currentDeck.splice(0,1);
+  res.send(currentDeck);
 });
 
 

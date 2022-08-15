@@ -18,17 +18,15 @@ export default function Home ({navigation}) {
     })
   }, [])
 
-  // const handleDraw = () => {
-  //   axios.post(`http://localhost:3000/cards`, {
-  //     data: deckID
-  //   })
-  //   .then((res) => {
-  //     console.log(res.data)
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   })
-  // }
+  const handleDraw = () => {
+    axios.get(`http://localhost:3000/draw`)
+    .then((res) => {
+      console.log(res.data)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
 
   return (
     <>
@@ -42,10 +40,10 @@ export default function Home ({navigation}) {
         />
         <StatusBar style="auto" />
       </View>
-      {/* <View style={styles.cards}>
+      <View style={styles.cards}>
         <StatusBar style="auto" />
         <Button onPress={handleDraw} title="CARDS"/>
-      </View> */}
+      </View>
       <View style={styles.players}>
         <StatusBar style="auto" />
         <Button onPress={()=> navigation.navigate('Players')} title="Add Players!"/>
@@ -72,12 +70,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     resizeMode: 'contain'
   },
-  // cards: {
-  //   flex: .5,
-  //   backgroundColor: '#fff',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
+  cards: {
+    flex: .5,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   players: {
     flex: .5,
     backgroundColor: '#fff',
