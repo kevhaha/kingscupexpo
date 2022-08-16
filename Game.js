@@ -9,11 +9,7 @@ export default function Game ({route, navigation}) {
   // const { playerArray, setPlayerArray } = useContext(PlayersContext)
   // const { playerArray, setPlayerArray } = usePlayers();
   const players = route.params.players;
-
-  const [deckID, setDeckID] = useState('');
   const [questionMaster, setQuestionMaster] = useState('');
-  // const [mates, setMates] = useState([]);
-  // linked list?
   const [deckLoaded, setDeckLoaded] = useState(false);
   const [cardLoaded, setCardLoaded] = useState(false);
   const [currentCard, setCurrentCard] = useState('');
@@ -23,6 +19,8 @@ export default function Game ({route, navigation}) {
   const [kingsCount, setKingsCount] = useState(0);
   const [cardCount, setCardCount] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  // const [mates, setMates] = useState([]);
+  // linked list?
 
   const handleDraw = () => {
     setCardLoaded(false);
@@ -31,12 +29,12 @@ export default function Game ({route, navigation}) {
     } else {
       setPlayerIndex(playerIndex + 1);
     }
-    axios.get(`http://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
+    axios.get(`http://localhost:3000/draw`)
     .then((res) => {
       setCardCount(cardCount + 1);
-      setCurrentCard(res.data.cards[0].image);
-      setCurrentCardValue(res.data.cards[0].value);
-      if (res.data.cards[0].value === "KING") {
+      setCurrentCard(res.data.image);
+      setCurrentCardValue(res.data.value);
+      if (res.data.value === "KING") {
         setKingsCount(kingsCount + 1);
       }
     })
@@ -62,10 +60,7 @@ export default function Game ({route, navigation}) {
   }, [kingsCount])
 
   useEffect(() => {
-    axios.get('http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
-    .then((res) => {
-      setDeckID(res.data.deck_id);
-    })
+    axios.get(`http://localhost:3000/cards`)
     .then((res) => {
       setDeckLoaded(true);
     })
@@ -192,3 +187,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   }
 });
+
+// PRE DB WITH DECK OF CARDS API
+
+    // const [deckID, setDeckID] = useState('');
+
+    // axios.get(`http://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
+    // .then((res) => {
+    //   setCardCount(cardCount + 1);
+    //   setCurrentCard(res.data.cards[0].image);
+    //   setCurrentCardValue(res.data.cards[0].value);
+    //   if (res.data.cards[0].value === "KING") {
+    //     setKingsCount(kingsCount + 1);
+    //   }
+    // })
+
+    // axios.get('http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+    // .then((res) => {
+    //   setDeckID(res.data.deck_id);
+    // })
