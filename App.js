@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import Navigator from './Navigation.js';
+import Navigator from './components/Navigation.js';
 import {
   setCustomView,
   setCustomTextInput,
