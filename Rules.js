@@ -7,7 +7,6 @@ export default function Rules ({navigation}) {
 
   return (
       <SafeAreaView style={styles.container}>
-        {/* <Text style={styles.header}>List of Rules:</Text> */}
         <FlatList
           data={rulesData}
           renderItem={({ item }) =>

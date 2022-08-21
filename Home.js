@@ -5,31 +5,6 @@ const axios = require('axios');
 
 export default function Home ({navigation}) {
 
-  // const [deckID, setDeckID] = useState('');
-
-  // useEffect(() => {
-  //   axios.get(`http://localhost:3000/cards`)
-  //   .then((res) => {
-  //     console.log(res.data);
-  //     setDeckID(res.data);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   })
-  // }, [])
-
-  // const handleDraw = () => {
-  //   axios.post(`http://localhost:3000/cards`, {
-  //     data: deckID
-  //   })
-  //   .then((res) => {
-  //     console.log(res.data)
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   })
-  // }
-
   return (
     <>
       <View style={styles.container}>
@@ -42,10 +17,6 @@ export default function Home ({navigation}) {
         />
         <StatusBar style="auto" />
       </View>
-      {/* <View style={styles.cards}>
-        <StatusBar style="auto" />
-        <Button onPress={handleDraw} title="CARDS"/>
-      </View> */}
       <View style={styles.players}>
         <StatusBar style="auto" />
         <Button onPress={()=> navigation.navigate('Players')} title="Add Players!"/>
@@ -72,12 +43,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     resizeMode: 'contain'
   },
-  // cards: {
-  //   flex: .5,
-  //   backgroundColor: '#fff',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
   players: {
     flex: .5,
     backgroundColor: '#fff',
@@ -91,3 +56,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   }
 });
+
+  // Load Data from API
+
+  // const [deckID, setDeckID] = useState('');
+
+  // useEffect(() => {
+  //   axios.get(`http://localhost:3000/cards`)
+  //   .then((res) => {
+  //     console.log(res.data);
+  //     setDeckID(res.data);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
+  // }, [])
+
+  // const handleDraw = () => {
+  //   axios.post(`http://localhost:3000/cards`, {
+  //     data: deckID
+  //   })
+  //   .then((res) => {
+  //     console.log(res.data)
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
+  // }

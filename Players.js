@@ -2,13 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useContext } from 'react';
 import { FlatList, TextInput, Button, StyleSheet, Text, View } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-// import { usePlayers } from './PlayersContext.js';
-// import { PlayersContext } from './Navigation.js';
+
 
 export default function Players ({navigation}) {
-
-  // const { playerArray, setPlayerArray } = usePlayers();
-  // const { playerArray, setPlayerArray } = useContext(PlayersContext)
 
   const [players, setPlayers] = useState(0);
   const [player1, setPlayer1] = useState('');

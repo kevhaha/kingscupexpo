@@ -15,8 +15,6 @@ let currentDeck = [];
 app.get('/cards', (req, res) => {
   db.read()
   .then((response) => {
-    // console.log(response);
-    // console.log(response.length);
     var temp = response.slice();
     currentDeck = temp;
     res.send(response);
@@ -28,9 +26,6 @@ app.get('/cards', (req, res) => {
 
 app.get('/draw', (req, res) => {
   var randomIndex = Math.floor(Math.random() * (currentDeck.length-1))
-  // console.log(currentDeck);
-  // console.log(currentDeck.length);
-  // console.log(currentDeck[randomIndex]);
   res.send(currentDeck[randomIndex]);
   currentDeck.splice(randomIndex,1);
 });

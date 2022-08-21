@@ -1,13 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useContext } from 'react';
 import { FlatList, TouchableHighlight, Button, Image, StyleSheet, Text, View } from 'react-native';
-// import { usePlayers } from './PlayersContext.js';
 const axios = require('axios');
 
 export default function Game ({route, navigation}) {
 
-  // const { playerArray, setPlayerArray } = useContext(PlayersContext)
-  // const { playerArray, setPlayerArray } = usePlayers();
   const players = route.params.players;
   const [questionMaster, setQuestionMaster] = useState('');
   const [deckLoaded, setDeckLoaded] = useState(false);
@@ -65,7 +62,7 @@ export default function Game ({route, navigation}) {
       setDeckLoaded(true);
     })
     .catch((err) => {
-      console.log('game err', err);
+      console.log(err);
     })
   }, []);
 
