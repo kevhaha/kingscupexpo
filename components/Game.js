@@ -19,36 +19,34 @@ export default function Game ({route, navigation}) {
   // const [mates, setMates] = useState([]);
   // linked list?
 
-  const handleDraw = () => {
-    setCardLoaded(false);
-    if (playerIndex >= players.length-1) {
-      setPlayerIndex(0);
-    } else {
-      setPlayerIndex(playerIndex + 1);
-    }
-    axios.get(`http://localhost:3000/draw`)
-    .then((res) => {
+  async function handleDraw() {
+    try {
+      setCardLoaded(false);
+      const response = await axios.get(`http://localhost:3000/draw`)
       setCardCount(cardCount + 1);
-      setCurrentCard(res.data.image);
-      setCurrentCardValue(res.data.value);
-      if (res.data.value === "KING") {
+      setCurrentCard(response.data.image);
+      if (playerIndex >= players.length-1) {
+        setPlayerIndex(0);
+      } else {
+        setPlayerIndex(playerIndex + 1);
+      }
+      setCurrentPlayer(players[playerIndex]);
+      setCurrentCardValue(response.data.value);
+      if (response.data.value === "KING") {
         setKingsCount(kingsCount + 1);
       }
-    })
-    .then(() => {
       setCardLoaded(true);
-    })
-    .catch((err) => {
+      }
+    catch { err =>
       console.log(err);
-    })
-  }
+     }
+    }
 
   useEffect(() => {
-    setCurrentPlayer(players[playerIndex]);
     if (currentCardValue === "QUEEN") {
       setQuestionMaster(currentPlayer);
     }
-  }, [cardCount])
+  }, [currentCardValue])
 
   useEffect(() => {
     if (kingsCount === 4) {
