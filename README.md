@@ -22,9 +22,8 @@ Tasked with creating a minimum viable product that is a full stack application i
 - Question Master
 - Kings Cup Loser
 
-Rules Page & Add Players             |  Game
-:-------------------------:|:-------------------------:
-![Rules Page & Add Players](gif link here)  |  ![Game](gif link here)
+## Gameplay          
+https://user-images.githubusercontent.com/102768649/185819948-75287604-ef05-4d15-b02c-d86fd009b88c.mov
 
 ## Contributor
 
