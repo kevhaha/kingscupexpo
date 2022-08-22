@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useContext } from 'react';
-import { FlatList, TouchableHighlight, Button, Image, StyleSheet, Text, View } from 'react-native';
+import { FlatList, TouchableWithoutFeedback, Button, Image, StyleSheet, Text, View } from 'react-native';
 const axios = require('axios');
 
 export default function Game ({route, navigation}) {
@@ -86,14 +86,16 @@ export default function Game ({route, navigation}) {
             />
           </View>}
           {cardCount > 0 && cardLoaded &&
-          <TouchableHighlight onPress={handleDraw} style={styles.card}>
-            <Image
-              style={{ width: 226, height: 314}}
-              source={{
-                uri: currentCard
-              }}
-            />
-          </TouchableHighlight>}
+          <TouchableWithoutFeedback onPress={handleDraw}>
+            <View style={styles.card}>
+              <Image
+                style={{ width: 226, height: 314}}
+                source={{
+                  uri: currentCard
+                }}
+              />
+            </View>
+          </TouchableWithoutFeedback>}
           <View style={styles.gameInfo}>
             <Text>Turn: {currentPlayer}</Text>
             {/* <Text>Mates: {mates}</Text> */}
